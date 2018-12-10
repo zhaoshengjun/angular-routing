@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-person-detail",
@@ -6,7 +7,11 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./person-detail.component.css"]
 })
 export class PersonDetailComponent implements OnInit {
-  constructor() {}
+  constructor(private activeRoute: ActivatedRoute) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.activeRoute.params.subscribe(data => {
+      console.log("route id", data);
+    });
+  }
 }
