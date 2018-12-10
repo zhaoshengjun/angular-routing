@@ -8,12 +8,16 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class PersonDetailComponent implements OnInit {
   personId: string;
+  shouldShowChildren = false;
   constructor(private activeRoute: ActivatedRoute) {}
 
   ngOnInit() {
     this.activeRoute.params.subscribe(data => {
-      console.log(data);
       this.personId = data["personeId"];
+    });
+
+    this.activeRoute.queryParams.subscribe(data => {
+      this.shouldShowChildren = data["showChild"] === "true";
     });
   }
 }
