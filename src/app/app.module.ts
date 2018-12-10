@@ -6,19 +6,17 @@ import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
 import { AboutComponent } from "./about/about.component";
 import { NotfoundComponent } from "./notfound.component";
-import { PersonDetailComponent } from "./people/person-detail.component";
-import { ContactListComponent } from "./contacts/contact-list.component";
+import { PeopleModule } from "./people/people.module";
+import { ContactsModule } from "./contacts/contacts.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AboutComponent,
-    NotfoundComponent,
-    PersonDetailComponent,
-    ContactListComponent
+    NotfoundComponent
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, PeopleModule, ContactsModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent]
 })
