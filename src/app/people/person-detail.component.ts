@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { PeopleService } from "./people.service";
 
 @Component({
   selector: "app-person-detail",
@@ -7,17 +8,18 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ["./person-detail.component.css"]
 })
 export class PersonDetailComponent implements OnInit {
-  personId: string;
-  shouldShowChildren = false;
-  constructor(private activeRoute: ActivatedRoute) {}
+  person;
+  constructor(
+    private activeRoute: ActivatedRoute,
+    private peopleService: PeopleService
+  ) {}
 
   ngOnInit() {
     this.activeRoute.params.subscribe(data => {
-      this.personId = data["personeId"];
-    });
-
-    this.activeRoute.queryParams.subscribe(data => {
-      this.shouldShowChildren = data["showChild"] === "true";
+      const personId = data["personId"];
+      this.peopleService.getPersonById(+personId).subscribe(person => {
+        this.person = person;
+      });
     });
   }
 }
