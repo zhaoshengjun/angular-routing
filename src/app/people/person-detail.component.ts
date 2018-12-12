@@ -16,14 +16,8 @@ export class PersonDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.activeRoute.params
-      .pipe(
-        switchMap(params =>
-          this.peopleService.getPersonById(+params["personId"])
-        )
-      )
-      .subscribe(person => {
-        this.person = person;
-      });
+    this.activeRoute.data.subscribe(data => {
+      this.person = data["person"];
+    });
   }
 }
