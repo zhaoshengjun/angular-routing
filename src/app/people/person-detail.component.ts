@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { PeopleService } from "./people.service";
+import { switchMap } from "rxjs/operators";
 
 @Component({
   selector: "app-person-detail",
@@ -15,11 +16,14 @@ export class PersonDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.activeRoute.params.subscribe(data => {
-      const personId = data["personId"];
-      this.peopleService.getPersonById(+personId).subscribe(person => {
+    this.activeRoute.params
+      .pipe(
+        switchMap(params =>
+          this.peopleService.getPersonById(+params["personId"])
+        )
+      )
+      .subscribe(person => {
         this.person = person;
       });
-    });
   }
 }
