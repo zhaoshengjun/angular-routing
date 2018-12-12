@@ -10,4 +10,8 @@ export class PeopleService {
   getPersonById(personId: number) {
     return of(people.filter(x => x.id === personId));
   }
+
+  getAll() {
+    return of(people);
+  }
 }
